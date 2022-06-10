@@ -18,6 +18,7 @@
 
     <title>Shopping cart</title>
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">shopping cart</a>
@@ -96,6 +97,7 @@
               />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </div>
       </div>
@@ -113,33 +115,29 @@
   ></script>
 
   <script>
-
-    const url = "https://striveschool-api.herokuapp.com/api/product/";
-    const items = {
+    const products = async () => {
+      try {
+        const url = "https://striveschool-api.herokuapp.com/api/product/";
+        const items = {
           name: document.getElementById("name").value,
           description: document.getElementById("description").value,
           brand: document.getElementById("brand").value,
           price: document.getElementById("price").value,
           imageUrl: document.getElementById("imageUrl").value,
         };
-        console.log(items);
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(items),
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzNDM5MzdmZmQ0OTAwMTU4YTdhOWMiLCJpYXQiOjE2NTQ4NjY4MzUsImV4cCI6MTY1NjA3NjQzNX0.Lf3sP1v-oi3JBzgu1SdLmfd8HxkfH_ReSrCy-MXcD1k",
-
-            },
-          });
-          if (response.ok) {
-            const respEvent = await response.json();
-            alert("Yes");
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      ;
+        //console.log(items);
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(items),
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzNDM5MzdmZmQ0OTAwMTU4YTdhOWMiLCJpYXQiOjE2NTQ4NjY4MzUsImV4cCI6MTY1NjA3NjQzNX0.Lf3sP1v-oi3JBzgu1SdLmfd8HxkfH_ReSrCy-MXcD1k",
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
   </script>
 </html>
